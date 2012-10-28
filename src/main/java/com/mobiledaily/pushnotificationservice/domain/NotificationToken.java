@@ -1,5 +1,7 @@
 package com.mobiledaily.pushnotificationservice.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Created with IntelliJ IDEA.
  * User: johnson
@@ -8,6 +10,10 @@ package com.mobiledaily.pushnotificationservice.domain;
  * To change this template use File | Settings | File Templates.
  */
 public class NotificationToken {
+    public static final String PATTERN = "appKey:%s:serviceToken:%s";
+    public static final String USERNAME = "userName";
+    public static final String LONGITUDE = "longitude";
+    public static final String LATITUDE = "longitude";
     private String appKey;
     private String serviceToken;
     private String userName;
@@ -62,7 +68,13 @@ public class NotificationToken {
         this.latitude = latitude;
     }
 
+    @JsonIgnore
     public Location getLocation() {
         return Location.valueOf(longitude, latitude);
+    }
+
+    @Override
+    public String toString() {
+        return String.format(PATTERN, getAppKey(), getServiceToken());
     }
 }

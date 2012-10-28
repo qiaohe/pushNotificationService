@@ -10,12 +10,12 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface NotificationService {
-    public void send(final String appKey, final List<String> serviceTokens);
+    public void send(final List<String> serviceTokens, final String message);
 
-    public void send(final String appKey, final String serviceToken);
+    public void send(final String serviceToken, final String message);
 
-    public void broadcast(final String appKey);
+    public void broadcast(final String appKey, final String message);
 
-    public void broadcast();
+    public void broadcast(final String message);
 
 }

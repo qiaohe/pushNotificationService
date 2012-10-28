@@ -3,6 +3,8 @@ package com.mobiledaily.pushnotificationservice.service;
 import com.mobiledaily.pushnotificationservice.domain.Location;
 import com.mobiledaily.pushnotificationservice.domain.NotificationToken;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: johnson
@@ -16,4 +18,8 @@ public interface NotificationTokenService {
     public void updateIdentity(String appKey, String serviceToken, String user);
 
     public void updateLocation(String appKey, String ServiceToken, Location location);
+
+    public List<NotificationToken> getBy(final String appKey);
+
+    public List<NotificationToken> get();
 }

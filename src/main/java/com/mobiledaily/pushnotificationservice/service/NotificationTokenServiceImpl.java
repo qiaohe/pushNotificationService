@@ -6,6 +6,7 @@ import com.mobiledaily.pushnotificationservice.repository.NotificationRepository
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,6 +22,7 @@ public class NotificationTokenServiceImpl implements NotificationTokenService {
 
     @Override
     public void register(NotificationToken token) {
+        notificationRepository.add(token);
     }
 
     @Override
@@ -29,5 +31,15 @@ public class NotificationTokenServiceImpl implements NotificationTokenService {
 
     @Override
     public void updateLocation(String appKey, String ServiceToken, Location location) {
+    }
+
+    @Override
+    public List<NotificationToken> getBy(String appKey) {
+        return notificationRepository.findBy(appKey);
+    }
+
+    @Override
+    public List<NotificationToken> get() {
+        return notificationRepository.findAll();
     }
 }
