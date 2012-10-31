@@ -1,5 +1,6 @@
 package com.mobiledaily.pushnotificationservice.repository;
 
+import com.mobiledaily.pushnotificationservice.domain.Account;
 import com.mobiledaily.pushnotificationservice.domain.MobileApp;
 import com.mobiledaily.pushnotificationservice.domain.NotificationToken;
 import org.springframework.context.ApplicationContext;
@@ -133,6 +134,35 @@ public class NotificationRepositoryImpl implements NotificationRepository {
             result.add(getApp(appKey));
         }
         return result;
+    }
+
+    public void addAccount(Account account) {
+        final String key = KeyUtil.accountKey(account.getUserName());
+        hashOperations.put(key, Account.PASSWORD, account.getPassword());
+        hashOperations.put(key, Account.EMAIL, account.getEmail());
+        hashOperations.put(key, Account.PHONE, account.getPhone());
+        hashOperations.put(key, Account.ADDRESS, account.getAddress());
+        template.persist(key);
+    }
+
+    public Account getAccount(String userName) {
+        Account result = new Account();
+        final String key = KeyUtil.accountKey(userName);
+        result.setUserName(userName);
+        result.setEmail(hashOperations.get(key, Account.EMAIL));
+        result.setPassword(hashOperations.get(key, Account.PASSWORD));
+        result.setAddress(hashOperations.get(key, Account.ADDRESS));
+        result.setPhone(hashOperations.get(key, Account.PHONE));
+        return result;
+    }
+
+    public void removeAccount(Account account) {
+        final String key = KeyUtil.accountKey(account.getUserName());
+        hashOperations.delete(key, Account.PASSWORD);
+        hashOperations.delete(key, Account.EMAIL);
+        hashOperations.delete(key, Account.PHONE);
+        hashOperations.delete(key, Account.ADDRESS);
+        template.delete(key);
     }
 
     private String get(final String key, final String hashKey) {

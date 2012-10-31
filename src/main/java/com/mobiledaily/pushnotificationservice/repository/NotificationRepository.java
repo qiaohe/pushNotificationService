@@ -1,5 +1,6 @@
 package com.mobiledaily.pushnotificationservice.repository;
 
+import com.mobiledaily.pushnotificationservice.domain.Account;
 import com.mobiledaily.pushnotificationservice.domain.MobileApp;
 import com.mobiledaily.pushnotificationservice.domain.NotificationToken;
 
@@ -34,4 +35,10 @@ public interface NotificationRepository {
     public MobileApp getApp(String appKey);
 
     public List<MobileApp> getApps();
+
+    public void addAccount(Account account);
+
+    public void removeAccount(Account account);
+
+    public Account getAccount(String userName);
 }

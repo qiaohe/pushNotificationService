@@ -26,4 +26,8 @@ public final class KeyUtil {
     public static String mobileApp(final String appKey) {
         return String.format(APP_KEY_PATTERN, appKey);
     }
+
+    public static String accountKey(final String userName) {
+        return String.format("user:" + userName, userName);
+    }
 }
